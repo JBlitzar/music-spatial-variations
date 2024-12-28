@@ -83,10 +83,14 @@ TonalRingList.prototype.display = function (t) {
       break;
     }
   }
+  t -= 1; // learn counting
+  console.log(t);
+  console.log(this.rings[t]);
   this.rings[t].display();
 };
 TonalRingList.prototype.handleMidiEvent = function (noteId, velocity, delta) {
   if (delta != 0) {
+    console.log(`new delta ${delta} ${noteId} ${velocity}`);
     this.addRing(new TonalRing([]), delta);
   }
 
