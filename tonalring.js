@@ -14,6 +14,13 @@ function TonalRing(tones) {
     "A#",
     "B",
   ];
+
+  if (typeof tones[0] === "string") {
+    console.log("mappinginging");
+    this.tones = tones.map(function (tone) {
+      return this.notes.indexOf(tone);
+    });
+  }
 }
 
 TonalRing.prototype.display = function () {
