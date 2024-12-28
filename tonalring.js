@@ -1,5 +1,6 @@
-function TonalRing(tones) {
-  this.tones = tones;
+function Note(tone, volume) {
+  this.tone = tone;
+  this.volume = volume;
   this.notes = [
     "C",
     "C#",
@@ -14,18 +15,33 @@ function TonalRing(tones) {
     "A#",
     "B",
   ];
-
-  if (typeof tones[0] === "string") {
-    console.log("mappinginging");
-    this.tones = tones.map((tone) => {
-      return this.notes.indexOf(tone);
-    });
+  if (typeof tone === "string") {
+    this.tone = this.notes.indexOf(tone);
   }
+}
+
+function TonalRing(notes) {
+  this.notes = notes;
+  this.scale = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B",
+  ];
 }
 
 TonalRing.prototype.display = function () {
   r = height / 4;
   beginShape();
+  vertex(width / 2, height / 2);
   for (var i = 0; i < 12; i++) {
     // centered, starts at 12 o'clock
     // learn trig
@@ -38,10 +54,14 @@ TonalRing.prototype.display = function () {
     //console.log((angle * 180) / PI);
 
     ellipse(x, y, 10, 10);
-    text(this.notes[i], x, y);
-    if (this.tones.includes(i)) {
-      vertex(x, y);
-    }
+    text(this.scale[i], x, y);
+    this.notes.forEach((element) => {
+      if (element.tone === i) {
+        var x = width / 2 + r * element.volume * cos(angle);
+        var y = height / 2 + r * element.volume * sin(angle);
+        vertex(x, y);
+      }
+    });
   }
   endShape(CLOSE);
 };

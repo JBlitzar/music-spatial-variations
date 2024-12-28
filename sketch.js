@@ -3,7 +3,7 @@ function setup() {
   colorMode(HSB);
   angleMode(RADIANS);
 }
-let ring = new TonalRing(["C", "E", "G", "A#"]);
+let ring = new TonalRing([new Note("C", 1), new Note("E", 0.2)]);
 
 function draw() {
   background(220);
