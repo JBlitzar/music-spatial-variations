@@ -17,20 +17,26 @@ function TonalRing(tones) {
 
   if (typeof tones[0] === "string") {
     console.log("mappinginging");
-    this.tones = tones.map(function (tone) {
+    this.tones = tones.map((tone) => {
       return this.notes.indexOf(tone);
     });
   }
 }
 
 TonalRing.prototype.display = function () {
-  fill(255, 0, 0);
+  //fill(255, 0, 0);
   r = height / 4;
   beginShape();
   for (var i = 0; i < 12; i++) {
     // centered, starts at 12 o'clock
-    var x = width / 2 + r * cos((TWO_PI * i - PI / 4) / 12);
-    var y = height / 2 + r * sin((TWO_PI * i - PI / 4) / 12);
+    // learn trig
+    var angle = (TWO_PI * i) / 12 - PI / 2;
+    var x = width / 2 + r * cos(angle);
+    var y = height / 2 + r * sin(angle);
+
+    fill((angle * PI) / 180, 85, 90);
+    console.log((angle * PI) / 180);
+
     ellipse(x, y, 10, 10);
     text(this.notes[i], x, y);
     if (this.tones.includes(i)) {
