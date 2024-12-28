@@ -24,7 +24,6 @@ function TonalRing(tones) {
 }
 
 TonalRing.prototype.display = function () {
-  //fill(255, 0, 0);
   r = height / 4;
   beginShape();
   for (var i = 0; i < 12; i++) {
@@ -34,8 +33,9 @@ TonalRing.prototype.display = function () {
     var x = width / 2 + r * cos(angle);
     var y = height / 2 + r * sin(angle);
 
-    fill((angle * PI) / 180, 85, 90);
-    console.log((angle * PI) / 180);
+    // learn dimensional analysis
+    fill((angle * 180) / PI, 85, 90);
+    console.log((angle * 180) / PI);
 
     ellipse(x, y, 10, 10);
     text(this.notes[i], x, y);
