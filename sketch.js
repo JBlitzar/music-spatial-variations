@@ -6,19 +6,19 @@ ringList.addRing(
 );
 ringList.addRing(
   new TonalRing([new Note("C#", 1), new Note("F", 1), new Note("G#", 1)]),
-  1
+  2
 );
 ringList.addRing(
   new TonalRing([new Note("C", 1), new Note("E", 1), new Note("G", 1)]),
-  2
+  4
 );
 ringList.addRing(
   new TonalRing([new Note("D#", 1), new Note("F", 1), new Note("A#", 1)]),
-  2
+  6
 );
 ringList.addRing(
   new TonalRing([new Note("E", 1), new Note("F", 1), new Note("A#", 1)]),
-  2
+  7
 );
 document
   .getElementById("midiFileInput")
@@ -46,7 +46,7 @@ function setup() {
   createCanvas(innerWidth, innerHeight);
   colorMode(HSB);
   angleMode(RADIANS);
-  frameRate(1);
+  frameRate(2);
 }
 //let ring = new TonalRing([new Note("C", 1), new Note("E", 1)]);
 

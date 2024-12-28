@@ -41,7 +41,9 @@ function TonalRing(notes) {
 TonalRing.prototype.display = function () {
   r = height / 4;
   beginShape();
-  vertex(width / 2, height / 2);
+  var firstX;
+  var firstY;
+  noStroke();
   for (var i = 0; i < 12; i++) {
     // centered, starts at 12 o'clock
     // learn trig
@@ -60,9 +62,15 @@ TonalRing.prototype.display = function () {
         var x = width / 2 + r * element.volume * cos(angle);
         var y = height / 2 + r * element.volume * sin(angle);
         vertex(x, y);
+        if (firstX === undefined) {
+          firstX = x;
+          firstY = y;
+        }
       }
     });
   }
+  vertex(firstX, firstY); // learn concavity
+  vertex(width / 2, height / 2);
   endShape(CLOSE);
 };
 
