@@ -35,7 +35,7 @@ TonalRing.prototype.display = function () {
 
     // learn dimensional analysis
     fill((angle * 180) / PI, 85, 90);
-    console.log((angle * 180) / PI);
+    //console.log((angle * 180) / PI);
 
     ellipse(x, y, 10, 10);
     text(this.notes[i], x, y);
