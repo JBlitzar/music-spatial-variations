@@ -67,8 +67,8 @@ TonalRing.prototype.display = function () {
 };
 
 function TonalRingList() {
-  this.rings = [];
-  this.deltas = [];
+  this.rings = [new TonalRing([])];
+  this.deltas = [0];
 }
 TonalRingList.prototype.addRing = function (ring, delta = 0) {
   this.rings.push(ring);
