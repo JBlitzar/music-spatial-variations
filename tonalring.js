@@ -65,3 +65,31 @@ TonalRing.prototype.display = function () {
   }
   endShape(CLOSE);
 };
+
+function TonalRingList() {
+  this.rings = [];
+  this.deltas = [];
+}
+TonalRingList.prototype.addRing = function (ring, delta = 0) {
+  this.rings.push(ring);
+  this.deltas.push(delta);
+};
+TonalRingList.prototype.display = function (t) {
+  var acc = 0;
+  for (var i = 0; i < this.deltas.length; i++) {
+    acc += this.deltas[i];
+    if (t < acc) {
+      t = i;
+      break;
+    }
+  }
+  this.rings[t].display();
+};
+TonalRingList.prototype.handleMidiEvent = function (noteId, velocity, delta) {
+  if (delta != 0) {
+    this.addRing(new TonalRing([]), delta);
+  }
+
+  var note = new Note(this.rings[0].scale[noteId % 12], velocity / 127);
+  this.rings[this.rings.length - 1].notes.push(note);
+};
