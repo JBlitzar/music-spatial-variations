@@ -68,22 +68,21 @@ TonalRing.prototype.display = function () {
 
 function TonalRingList() {
   this.rings = [new TonalRing([])];
-  this.deltas = [0];
+  this.times = [0];
 }
 TonalRingList.prototype.addRing = function (ring, delta = 0) {
   this.rings.push(ring);
-  this.deltas.push(delta);
+  this.times.push(delta);
 };
 TonalRingList.prototype.display = function (t) {
-  var acc = 0;
-  for (var i = 0; i < this.deltas.length; i++) {
-    acc += this.deltas[i];
-    if (t < acc) {
+  for (var i = 0; i < this.times.length; i++) {
+    if (t <= this.times[i]) {
       t = i;
       break;
     }
   }
-  t -= 1; // learn counting
+  t = t - 1;
+  t = t % this.rings.length;
   console.log(t);
   console.log(this.rings[t]);
   this.rings[t].display();
