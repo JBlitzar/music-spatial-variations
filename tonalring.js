@@ -36,6 +36,20 @@ function TonalRing(notes) {
     "A#",
     "B",
   ];
+  this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  this._playSineWave = function (frequency, duration = 1) {
+    const oscillator = this.audioContext.createOscillator();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(
+      frequency,
+      this.audioContext.currentTime
+    );
+    oscillator.connect(this.audioContext.destination);
+    oscillator.start();
+    oscillator.stop(this.audioContext.currentTime + duration);
+  };
+  this.octave = 1;
 }
 
 TonalRing.prototype.display = function () {
@@ -66,6 +80,11 @@ TonalRing.prototype.display = function () {
           firstX = x;
           firstY = y;
         }
+        try {
+          this._playSineWave(440 * pow(2, i / 12) * 2 ** this.octave, 0.5); // learn frequency (I think)
+        } catch (e) {
+          console.log(e);
+        }
       }
     });
   }
@@ -83,6 +102,7 @@ TonalRingList.prototype.addRing = function (ring, delta = 0) {
   this.times.push(delta);
 };
 TonalRingList.prototype.display = function (t) {
+  //t = t % this.times[this.times.length - 1];
   for (var i = 0; i < this.times.length; i++) {
     if (t <= this.times[i]) {
       t = i;
@@ -90,9 +110,13 @@ TonalRingList.prototype.display = function (t) {
     }
   }
   t = t - 1;
-  t = t % this.rings.length;
+  //   t = t % this.times.length;
   console.log(t);
   console.log(this.rings[t]);
+  if (this.rings[t] === undefined) {
+    return;
+  }
+
   this.rings[t].display();
 };
 TonalRingList.prototype.handleMidiEvent = function (noteId, velocity, delta) {

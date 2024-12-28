@@ -18,8 +18,13 @@ ringList.addRing(
 );
 ringList.addRing(
   new TonalRing([new Note("E", 1), new Note("F", 1), new Note("A#", 1)]),
-  7
+  8
 );
+ringList.addRing(
+  new TonalRing([new Note("E", 1), new Note("F", 1), new Note("A#", 1)]),
+  10
+);
+
 document
   .getElementById("midiFileInput")
   .addEventListener("change", function (event) {
